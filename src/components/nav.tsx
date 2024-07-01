@@ -10,26 +10,17 @@ import { Button } from "@nextui-org/button";
 
 const Nav = () => {
   return (
-    <Navbar>
+    <Navbar className="backdrop-blur-xl text-light border-b-1 border-dark-3">
       <NavbarBrand>
-        <p className="font-bold text-inherit">ACME</p>
+        <p className="font-bold text-inherit">MUG-SPACE</p>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
+      <NavbarContent
+        className="hidden sm:flex gap-8 text-dark-1"
+        justify="center"
+      >
+        <NavbarItem>Features</NavbarItem>
+        <NavbarItem>Customers</NavbarItem>
+        <NavbarItem>Integrations</NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
