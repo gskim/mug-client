@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { NextUIProvider } from "@nextui-org/system";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="text-dark">{children}</body>
     </html>
   );
 }
