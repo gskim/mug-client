@@ -7,7 +7,7 @@ import {
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 
-const Nav = () => {
+const Header = () => {
   return (
     <Navbar
       className="backdrop-blur-xl text-light justify-between h-[56px] border-b-1 border-dark-3"
@@ -16,7 +16,7 @@ const Nav = () => {
       }}
     >
       <NavbarBrand>
-        <p className="font-bold text-inherit">MUG-SPACE</p>
+        <p className="font-bold text-inherit text-yellow">MUG-SPACE</p>
       </NavbarBrand>
       <NavbarContent
         className="flex gap-[100px] text-dark-1 cursor-pointer"
@@ -37,7 +37,7 @@ const Nav = () => {
             color="primary"
             variant="faded"
             size="sm"
-            className="text-yellow"
+            className="text-orange"
           >
             가입하기
           </Button>
@@ -47,4 +47,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default Header;
