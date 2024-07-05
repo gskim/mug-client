@@ -1,14 +1,20 @@
+"use client";
+
 import Divider from "@/common/Divider";
 import Header from "@/components/Header";
+import { useScroll, useTransform, motion, transform } from "framer-motion";
+import { useRef } from "react";
 
 export default function Home() {
   return (
     <main>
       <Header />
-      <div className="max-w-[1050px] m-auto mt-[60px]">
+      <div className="max-w-[1050px] m-auto mt-[60px] pb-[300px]">
         <Title />
-        <Divider className="h-[60px] border-0" />
+        <Divider className="h-[80px]" />
         <Content />
+        <Divider className="h-[80px]" />
+        <Detail />
       </div>
     </main>
   );
@@ -23,13 +29,13 @@ const Title = () => {
       <h1 className="text-[40px] font-Cookie">
         간편하게 유튜브 <br />
         <span className="text-red relative font-Cookie">
-          <div className="border-[10px] absolute bottom-0 w-[175px] opacity-40" />
+          <div className="border-[10px] absolute bottom-0 w-[175px] opacity-40 z-1" />
           타임스탬프
         </span>
         를 만들어서, <br />
         시청자들이{" "}
         <span className="text-blue relative font-Cookie">
-          <div className="border-[10px] absolute bottom-0 left-[0px] w-[180px] opacity-40" />
+          <div className="border-[10px] absolute bottom-0 left-[0px] w-[180px] opacity-40 z-1" />
           원하는 순간
         </span>
         을 <br />
@@ -76,5 +82,45 @@ const Card = ({
       <Divider className="h-4 border-0" />
       <p className="text-dark-1">{content}</p>
     </div>
+  );
+};
+
+const Detail = () => {
+  const y = transform([0, 100], [0, 0]);
+
+  return (
+    <motion.section
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: true }}
+      variants={{
+        offscreen: {
+          y: 100,
+          opacity: 0,
+        },
+        onscreen: {
+          y: 0,
+          transition: {
+            duration: 0.5,
+            delay: 0.2,
+          },
+          opacity: 1,
+        },
+      }}
+    >
+      <div className="flex gap-4">
+        <div className="flex-1">
+          <h4 className="text-[24px] text-yellow mb-2">
+            동영상 주소로 간편하게 생성가능!
+          </h4>
+          <div className="text-[20px] text-dark-2">
+            생성하고자 하는 유튜브 동영상의 주소(URL)을 붙여넣으면
+            <br />
+            간편하고 빠르게 타임스탬프를 생성하실 수 있습니다.
+          </div>
+        </div>
+        <div className="flex-1 border-1"></div>
+      </div>
+    </motion.section>
   );
 };

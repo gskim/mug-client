@@ -10,13 +10,13 @@ import { Button } from "@nextui-org/button";
 const Header = () => {
   return (
     <Navbar
-      className="backdrop-blur-xl text-light justify-between h-[56px] border-b-1 border-dark-3"
+      className="backdrop-blur-xl text-light justify-between h-[56px] border-b-1 border-dark-3 sticky top-0 z-10"
       classNames={{
         wrapper: `p-0 m-auto max-w-[1050px]`,
       }}
     >
       <NavbarBrand>
-        <p className="font-bold text-inherit text-yellow">MUG-SPACE</p>
+        <p className="font-bold text-inherit">MUG-SPACE</p>
       </NavbarBrand>
       <NavbarContent
         className="flex gap-[100px] text-dark-1 cursor-pointer"
