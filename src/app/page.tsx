@@ -160,7 +160,7 @@ const Detail1 = () => {
         </div>
         <div className="flex flex-1 justify-end items-center">
           {isInView && (
-            <div className="border-1 p-4 rounded-l-md flex">
+            <div className="border-1 border-dark-2 p-4 rounded-l-md flex">
               {text.map((el, i) => (
                 <motion.div
                   className="text-dark"
@@ -177,7 +177,7 @@ const Detail1 = () => {
               ))}
             </div>
           )}
-          <div className="bg-white h-[58px] flex items-center px-5 text-dark-3 rounded-r-md">
+          <div className="bg-dark-2 border-1 border-dark-2 h-[58px] flex items-center px-5 text-dark-1 rounded-r-md">
             생성하기
           </div>
         </div>
@@ -209,7 +209,7 @@ const Detail2 = () => {
     >
       <div className="flex gap-4">
         <div className="flex flex-1 gap-4 justify-start items-center">
-          <div className="text-[56px] text-orange pr-2">200원</div>
+          <div className="text-[56px] text-white pr-2">200원</div>
           <div className="text-[30px] text-grey-500 mt-2">/</div>
           <div className="text-[32px] text-grey-500 mt-2">10분</div>
         </div>
