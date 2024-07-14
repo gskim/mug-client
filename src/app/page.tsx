@@ -3,15 +3,23 @@
 import Divider from "@/common/Divider";
 import Header from "@/components/Header";
 import { IMAGES } from "@/icons/assets";
-import { motion, transform, useInView } from "framer-motion";
+import { PlusIcon } from "@/icons/PlusIcon";
+import { Checkbox } from "@nextui-org/checkbox";
+import {
+  animate,
+  motion,
+  useInView,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 
 export default function Home() {
   return (
     <main>
       <Header />
-      <div className="max-w-[1050px] m-auto mt-[100px] pb-[300px]">
+      <div className="max-w-[1050px] m-auto mt-[100px]">
         <Title />
         <Divider className="h-[120px]" />
         <Content />
@@ -22,14 +30,17 @@ export default function Home() {
         <Divider className="h-[120px]" />
         <Detail3 />
       </div>
+      <Divider className="h-[150px]" />
+      <Price />
+      <Divider className="h-[300px]" />
     </main>
   );
 }
 
 const Title = () => {
   return (
-    <div className="flex gap-10 w-full relative">
-      <div className="z-10">
+    <div className="flex gap-10 w-full relative z-1">
+      <div className="">
         <div className="border-l-3 border-yellow pl-2 mb-4 font-Cookie text-yellow">
           쉽고, 빠르고, 편하게
         </div>
@@ -49,13 +60,13 @@ const Title = () => {
           바로 찾아보세요!
         </h1>
       </div>
-      <div className="w-[600px] right-0 h-[283px] absolute rounded-md overflow-hidden z-0">
-        <Image
+      <div className="w-[550px] right-0 h-[283px] absolute rounded-md overflow-hidden z-0">
+        {/* <Image
           fill
           src={IMAGES.thumbnail}
           alt="thumbnail"
           className="object-contain"
-        />
+        /> */}
       </div>
     </div>
   );
@@ -229,8 +240,23 @@ const Detail2 = () => {
 };
 
 const Detail3 = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+
+  const count = useMotionValue(20);
+  const rounded = useTransform(count, Math.round);
+
+  useEffect(() => {
+    isInView &&
+      animate(count, 1, {
+        duration: 2,
+        delay: 0.5,
+      });
+  }, [count, isInView]);
+
   return (
     <motion.section
+      ref={ref}
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true }}
@@ -261,8 +287,113 @@ const Detail3 = () => {
             잡으세요!
           </div>
         </div>
-        <div className="flex flex-1 justify-end items-center"></div>
+        <div className="flex flex-1 justify-end items-center text-[40px]">
+          {isInView && (
+            <motion.h1 className="text-[56px] text-white">{rounded}</motion.h1>
+          )}
+          <span className="ml-3 mt-1">위</span>
+        </div>
       </div>
     </motion.section>
+  );
+};
+
+const Price = () => {
+  const Title = ({ children }: { children: ReactNode }) => (
+    <div className="text-[24px] font-semibold">{children}</div>
+  );
+
+  const BenefitContent = ({ children }: { children: ReactNode }) => (
+    <div className="text-dark-3">
+      <Checkbox
+        defaultSelected
+        icon={<PlusIcon />}
+        classNames={{
+          wrapper: "bg-black",
+          base: "p-0 pr-1",
+        }}
+      />
+      {children}
+    </div>
+  );
+
+  return (
+    <motion.div
+      className="w-[100%] py-20 bg-dark-1"
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: true }}
+      variants={{
+        offscreen: {
+          y: 50,
+          opacity: 0,
+        },
+        onscreen: {
+          y: 0,
+          transition: {
+            duration: 0.5,
+          },
+          opacity: 1,
+        },
+      }}
+    >
+      <div className="flex m-auto w-fit gap-10">
+        <div className="bg-white rounded-md p-5 text-black">
+          <Title>Starter</Title>
+          <div className="mb-5 text-[16px] text-dark-2">
+            가볍게 유튜브를 시작하는 분들을 위해 추천합니다.
+          </div>
+          <Divider isBorder className="my-5 border-grey-800" />
+          <div className="text-[32px] font-bold text-center">1,000원</div>
+          <div className="text-center text-[18px] text-grey-300">
+            +50원 추가 적립
+          </div>
+          <Divider className="mb-5" />
+          <div className="w-[220px] m-auto">
+            <BenefitContent>최대 5개 타임스탬프 생성 가능</BenefitContent>
+            <BenefitContent>추가로 5% 적립 혜택</BenefitContent>
+          </div>
+        </div>
+        <div className="bg-white rounded-md p-5 text-black">
+          <Title>Pro</Title>
+          <div className="mb-5 text-[16px] text-dark-2">
+            본격적으로 영상을 올리는 분들을 위해 추천합니다.
+          </div>
+          <Divider isBorder className="my-5 border-grey-800" />
+          <div className="text-[32px] font-bold text-center">5,000원</div>
+          <div className="text-center text-[18px] text-grey-300">
+            <span className="text-blue">+500원</span> 추가 적립
+          </div>
+          <Divider className="mb-5" />
+          <div className="w-[220px] m-auto">
+            <BenefitContent>최대 27개 타임스탬프 생성 가능</BenefitContent>
+            <Divider className="mb-1" />
+            <BenefitContent>
+              추가로 <span className="text-blue font-bold">10% 적립 혜택</span>
+            </BenefitContent>
+          </div>
+        </div>
+        <div className="bg-white rounded-md p-5 text-black">
+          <Title>Enterprise</Title>
+          <div className="mb-5 text-[16px] text-dark-2">
+            인플루언서가 되고자 하는 분들을 위해 추천합니다.
+          </div>
+          <Divider isBorder className="my-5 border-grey-800" />
+          <div className="text-[32px] font-bold text-center">10,000원</div>
+          <div className="text-center text-[18px] text-grey-300">
+            <span className="text-red">+1,500원</span> 추가 적립
+          </div>
+          <Divider className="mb-5" />
+          <div className="w-[220px] m-auto">
+            <BenefitContent>최대 57개 타임스탬프 생성 가능</BenefitContent>
+            <Divider className="mb-1" />
+            <BenefitContent>
+              추가로{" "}
+              <span className="text-red font-semibold">15% 적립 혜택</span>
+            </BenefitContent>
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 };

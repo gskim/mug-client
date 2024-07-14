@@ -24,9 +24,9 @@ import { emailCheck } from "@/hooks/regex";
 const Header = () => {
   return (
     <Navbar
-      className="backdrop-blur-xl text-light justify-between h-[56px] border-b-1 border-dark-3 sticky top-0 z-10"
+      className="backdrop-blur-xl text-light justify-between h-[56px] border-b-1 border-dark-3 sticky top-0 "
       classNames={{
-        wrapper: `p-0 m-auto max-w-[1050px]`,
+        wrapper: `p-0 m-auto max-w-[1050px] z-20`,
       }}
     >
       <NavbarBrand>
@@ -45,14 +45,7 @@ const Header = () => {
           <LoginModal />
         </NavbarItem>
         <NavbarItem>
-          <Button
-            color="primary"
-            variant="faded"
-            size="sm"
-            className="text-orange"
-          >
-            가입하기
-          </Button>
+          <SignUpModal />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
@@ -64,8 +57,8 @@ export default Header;
 const LoginModal = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const [email, setEmail] = useState("");
-  const [isEmail, setIsEmail] = useState(true);
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <>
@@ -90,17 +83,10 @@ const LoginModal = () => {
               </ModalHeader>
               <ModalBody>
                 <Input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
                   autoFocus
-                  onFocus={() => setIsEmail(true)}
-                  onBlur={() => setIsEmail(false)}
-                  endContent={
-                    <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                  }
-                  label="이메일"
-                  errorMessage="이메일 형식이 맞는지 확인해주세요"
-                  isInvalid={!isEmail && email ? !emailCheck(email) : false}
+                  label="아이디"
                   variant="bordered"
                   classNames={{
                     label: "!text-dark-2 mb-1",
@@ -108,6 +94,8 @@ const LoginModal = () => {
                   }}
                 />
                 <Input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   endContent={
                     <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                   }
@@ -139,6 +127,122 @@ const LoginModal = () => {
                   onPress={onClose}
                 >
                   로그인
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+const SignUpModal = () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  const [isRePw, setIsRePw] = useState(true);
+
+  const [email, setEmail] = useState("");
+  const [isEmail, setIsEmail] = useState(true);
+
+  return (
+    <>
+      <Button
+        color="primary"
+        variant="faded"
+        size="sm"
+        className="text-orange"
+        onClick={onOpen}
+      >
+        가입하기
+      </Button>
+      <Modal
+        backdrop="opaque"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="top-center"
+        classNames={{
+          backdrop: "bg-[#121212]/40",
+          closeButton: "opacity-0",
+        }}
+      >
+        <ModalContent className="bg-dark border-1 border-dark-3">
+          {(onClose) => (
+            <>
+              <ModalHeader className="w-full flex justify-center">
+                MUG-SPACE
+              </ModalHeader>
+              <ModalBody>
+                <Input
+                  autoFocus
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                  label="아이디"
+                  variant="bordered"
+                  classNames={{
+                    label: "!text-dark-2 mb-1",
+                    inputWrapper: "border-1",
+                  }}
+                />
+                <Input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  endContent={
+                    <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                  }
+                  label="비밀번호"
+                  type="password"
+                  variant="bordered"
+                  classNames={{
+                    label: "!text-dark-2 mb-1",
+                    inputWrapper: "border-1",
+                  }}
+                />
+                <Input
+                  value={rePassword}
+                  onChange={(e) => setRePassword(e.target.value)}
+                  endContent={
+                    <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                  }
+                  label="비밀번호 확인"
+                  errorMessage="비밀번호가 맞는지 확인해주세요"
+                  isInvalid={!isRePw && password !== rePassword ? true : false}
+                  onFocus={() => setIsRePw(true)}
+                  onBlur={() => setIsRePw(false)}
+                  type="password"
+                  variant="bordered"
+                  classNames={{
+                    label: "!text-dark-2 mb-1",
+                    inputWrapper: "border-1",
+                  }}
+                />
+                <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onFocus={() => setIsEmail(true)}
+                  onBlur={() => setIsEmail(false)}
+                  endContent={
+                    <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                  }
+                  label="이메일"
+                  errorMessage="이메일 형식이 맞는지 확인해주세요"
+                  isInvalid={!isEmail && email ? !emailCheck(email) : false}
+                  variant="bordered"
+                  classNames={{
+                    label: "!text-dark-2 mb-1",
+                    inputWrapper: "border-1 mt-[-8px]",
+                  }}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  className="text-white w-full bg-primary-700"
+                  onPress={onClose}
+                >
+                  가입하기
                 </Button>
               </ModalFooter>
             </>

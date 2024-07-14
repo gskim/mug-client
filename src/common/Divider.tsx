@@ -9,9 +9,9 @@ const Divider = ({ className, isBorder = false }: Props) => {
   return (
     <div
       className={
-        isBorder ? `border-b-1 border-dark-3 ${className}` : `${className}`
+        isBorder ? `border-b-1 border-dark-3 ${className}` : ` ${className}`
       }
-    ></div>
+    />
   );
 };
 

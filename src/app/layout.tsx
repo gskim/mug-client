@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { NextUIProvider } from "@nextui-org/system";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="text-dark">{children}</body>
+      <Footer />
     </html>
   );
 }
