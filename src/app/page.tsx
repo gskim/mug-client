@@ -1,6 +1,7 @@
 "use client";
 
 import Divider from "@/common/Divider";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { IMAGES } from "@/icons/assets";
 import { PlusIcon } from "@/icons/PlusIcon";
@@ -33,6 +34,7 @@ export default function Home() {
       <Divider className="h-[150px]" />
       <Price />
       <Divider className="h-[300px]" />
+      <Footer />
     </main>
   );
 }
@@ -47,26 +49,26 @@ const Title = () => {
         <h1 className="text-[40px] font-Cookie">
           간편하게 유튜브 <br />
           <span className="text-red relative font-Cookie">
-            <span className="text-red">[</span>타임스탬프
-            <span className="text-red">]</span>
+            <span className="text-red">[ </span>타임스탬프
+            <span className="text-red"> ] </span>
           </span>
           를 만들어서, <br />
           시청자들이{" "}
-          <span className="text-blue relative font-Cookie">
-            <span className="text-blue">[</span>원하는 순간
-            <span className="text-blue">]</span>
+          <span className="text-primary-300 relative font-Cookie">
+            <span className="text-primary-300">[ </span>원하는 순간
+            <span className="text-primary-300"> ] </span>
           </span>
           을 <br />
-          바로 찾아보세요!
+          바로 찾아보세요 !
         </h1>
       </div>
       <div className="w-[550px] right-0 h-[283px] absolute rounded-md overflow-hidden z-0">
-        {/* <Image
+        <Image
           fill
           src={IMAGES.thumbnail}
           alt="thumbnail"
           className="object-contain"
-        /> */}
+        />
       </div>
     </div>
   );
@@ -94,7 +96,7 @@ const Content = () => {
         content={"유튜브 설명란에 타임스탬프를 넣어 검색어 순위를 높여보세요."}
         bg={"bg-red"}
         src={IMAGES.first}
-        width={15}
+        width={33}
       />
     </div>
   );
