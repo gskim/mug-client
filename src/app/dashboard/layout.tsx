@@ -10,9 +10,10 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const path = usePathname();
 
   return (
-    <div className="flex relative">
-      <div className="w-[300px] h-[100vh] pl-20 pt-[15%] sticky top-0">
-        <Divider isBorder className="border-yellow border-2 mb-5" />
+    <div className="flex">
+      <div className="min-w-[300px] h-[100vh] pl-20 pt-[200px] sticky top-0">
+        <h4 className="text-[22px]">현재 포인트: 0</h4>
+        <Divider isBorder className="border-yellow border-2 my-5" />
         <div className="flex flex-col gap-8">
           <Link href={"/dashboard/timestamp"}>
             <h3 className="text-[20px] font-semibold cursor-pointer">

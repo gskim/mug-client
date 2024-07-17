@@ -1,4 +1,3 @@
-import React from "react";
 export const PlusIcon = ({ size, height, width, ...props }: any) => {
   // avoid passing non-DOM attributes to svg
   const { isSelected, isIndeterminate, disableAnimation, ...otherProps } =

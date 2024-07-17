@@ -27,15 +27,15 @@ export const LayoutTransition = ({
 
   return (
     <AnimatePresence initial={false}>
-      <div>
+      <div className="flex-1 max-w-[650px] min-w-[550px] mx-auto mt-20">
         <motion.div
           key={pathname + "exit-animation"}
           style={{
             position: "absolute",
           }}
-          initial={{ x: 0 }}
+          initial={{ y: 0 }}
           animate={{
-            x: "-100%",
+            y: "-20%",
             opacity: 0,
           }}
           transition={{
@@ -48,8 +48,8 @@ export const LayoutTransition = ({
 
         <motion.div
           key={pathname}
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
+          initial={{ y: "10%" }}
+          animate={{ y: 0 }}
           transition={{ type: "linear", duration: 0.2 }}
         >
           {children}

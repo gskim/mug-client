@@ -3,4 +3,5 @@ export const IMAGES = {
   link: "/icons/link.png",
   first: "/icons/first.png",
   won: "/icons/won.png",
+  send: "/icons/send.svg",
 };
